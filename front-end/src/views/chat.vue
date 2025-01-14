@@ -46,7 +46,7 @@ export default {
   },
   mounted() {
     // Conecta ao servidor Socket.io
-    this.socket = io("http://localhost:3000");
+    this.socket = io("https://mensagens-5l2q.onrender.com");
 
     // Escuta quando o administrador aceita o chat
     this.socket.on("chat accepted", () => {

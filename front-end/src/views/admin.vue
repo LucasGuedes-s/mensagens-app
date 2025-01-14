@@ -43,7 +43,7 @@ export default {
   },
   mounted() {
     // Conecta ao servidor Socket.io como admin
-    this.socket = io("http://localhost:3000");
+    this.socket = io("https://mensagens-5l2q.onrender.com");
 
     // Envia sinal de que é o admin
     this.socket.emit("admin connect");
