@@ -5,24 +5,19 @@ const cors = require('cors');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
+const io = require("socket.io")(server, {
     cors: {
-        origin: ['http://localhost:8080', 'https://mensagens-app-alpha.vercel.app'], // Permita as origens necessárias
-        methods: ["GET", "POST"]
-    }
+        origin: "https://mensagens-app-alpha.vercel.app", // Permite apenas seu domínio
+        methods: ["GET", "POST"],
+    },
 });
+
 
 let adminSockets = [];  // Lista de administradores conectados
 let activeChats = {};   // Mapeamento de chats ativos (socketId do cliente -> administrador)
 
-const corsOptions = {
-    origin: ['http://localhost:8080', 'https://mensagens-app-alpha.vercel.app'], // Permita as origens necessárias
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // Se você estiver usando cookies ou autenticação baseada em sessão
-};
+app.use(cors({ origin: "https://mensagens-app-alpha.vercel.app" }));
 
-app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
     res.send("Chat server is running");
